@@ -1,0 +1,18 @@
+{
+  "name": "simple-async-message-ipc",
+  "version": "1.0.0",
+  "description": "An async message-based IPC protocol",
+  "keywords": [
+    "IPC",
+    "message",
+    "process",
+    "async",
+    "child"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Bruant <bruant.d@gmail.com> (https://twitter.com/DavidBruant)",
+  "license": "ISC"
+}
