@@ -3,7 +3,7 @@
 var spawn = require('child_process').spawn;
 var Channel = require('./Channel.js');
 
-var child = spawn('node', ['./child.js'], {
+var child = spawn('node', [require.resolve('./child.js')], {
     // 4th pipe is for communication
     stdio: [0, 1, 2, 'pipe']
 });

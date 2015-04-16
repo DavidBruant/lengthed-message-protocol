@@ -22,10 +22,14 @@ function Channel(readStream, writeStream){
         
     /*
         SENDING
+        data can be a string or a buffer
     */
-    this.send = function(str){
+    this.send = function(data){        
         var sizeFragment = new Buffer(4);
-        var strFragment = new Buffer(str);
+        var strFragment = new Buffer(data);
+        
+        if(strFragment.length > Math.pow(2, 32) - 1)
+            throw new RangeError('Message too long', strFragment.length);
             
         sizeFragment.writeUInt32LE(strFragment.length, 0, 4);
         
@@ -53,6 +57,7 @@ function Channel(readStream, writeStream){
     }
     
     function accumulateContent(chunk){
+        throw "TODO: don't concat here. Instead store the chunk in an array to be concat only at the end";
         partialMessageContent = partialMessageContent ?
             Buffer.concat([partialMessageContent, chunk]) :
             chunk;
