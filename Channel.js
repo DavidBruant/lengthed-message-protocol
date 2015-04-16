@@ -31,7 +31,7 @@ function Channel(readStream, writeStream){
         if(strFragment.length > Math.pow(2, 32) - 1)
             throw new RangeError('Message too long', strFragment.length);
             
-        sizeFragment.writeUInt32LE(strFragment.length, 0, 4);
+        sizeFragment.writeUInt32BE(strFragment.length, 0, 4);
         
         var b = Buffer.concat([sizeFragment, strFragment]);
         
@@ -75,7 +75,7 @@ function Channel(readStream, writeStream){
             accumulateLength(chunk.slice(0, contentFirstIndex));
         
             if(partialLengthBuffer.length === 4){
-                currentMessageLength = partialLengthBuffer.readUInt32LE(0, 4);
+                currentMessageLength = partialLengthBuffer.readUInt32BE(0, 4);
                 partialLengthBuffer = undefined;
             }
         }
