@@ -36,7 +36,7 @@ c.on("message", function(msg){
 
 ## Protocol details
 
-Messages are sent as | length (4 bytes) | content (length bytes) |
+Messages are sent as `| length (4 bytes) | content (length bytes) |`
 The protocol is taken care of transparently from the streams
 
-A 4-bytes length imposes a limitation of messages smaller than 2^32 bytes... but that's already a big message even to hold in memory. Create another protocol if you want bigger messages :-)
+A 4-bytes length imposes a limitation of messages smaller than 2<sup>32</sup>-1 bytes... but that's already a big message even to hold in memory. Create another protocol if you want bigger messages :-)
