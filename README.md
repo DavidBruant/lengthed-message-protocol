@@ -8,7 +8,7 @@ There is apparently no simple async IPC protocol in Node.
 
 Options are:
 * [process.send() + message event](https://nodejs.org/api/child_process.html#child_process_child_send_message_sendhandle). 
-  * According to the doc "Please note that the send() method on both the parent and child are synchronous - sending large chunks of data is not advised (pipes can be used instead, see child_process.spawn).". Empirically it also looks that when 4 children processes communicates
+  * According to the doc "Please note that the send() method on both the parent and child are synchronous - sending large chunks of data is not advised (pipes can be used instead, see child_process.spawn).". Empirically it also looks that when 4 children processes communicating with the parent require a lot of synchronization with the parent making it and the children not so useful any longer (wasting their time waiting for the other process to synchronize instead of doing actual work)
 * Redis pub/sub
   * Imposing Redis to do IPC seems overkill
 * [line-terminated protocols](https://github.com/pgte/carrier)
