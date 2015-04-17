@@ -1,8 +1,10 @@
 "use strict";
 
+console.log('child up!');
+
 var fs = require('fs');
 
-var Channel = require('./Channel.js');
+var Channel = require('../../Channel.js');
 
 function makeStreamsToParent(fd){
     return {
@@ -16,10 +18,10 @@ var parentStreams = makeStreamsToParent(3);
 var c = new Channel(parentStreams.read, parentStreams.write);
 
 c.on('message', function(msg){
-    console.log('message from parent:', msg.length);
+    var str = msg.toString();
     
-    if(msg.length >= Math.pow(2, 26))
-        return;
+    console.log('CHILD receiving', msg.length);
     
+    console.log('CHILD sending', msg.length*2);
     c.send(msg + msg);
 });

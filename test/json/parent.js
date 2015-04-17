@@ -17,8 +17,17 @@ var o = {
 
 c.send(JSON.stringify(o));
 
-c.on('message', function(msg){    
-    var m = JSON.parse(msg);
+c.on('message', function listener(msg){    
+    var m = JSON.parse(msg.toString());
     
-    console.log(m.a === o.a+1 && m.b === o.b+1);
+    if(m.a === o.a+1 && m.b === o.b+1){
+        console.log('passing');
+        c.removeListener('message', listener)
+        child.kill();
+        process.kill();
+    }
+    else{
+        console.log('failure', m);
+    }
+    
 });
